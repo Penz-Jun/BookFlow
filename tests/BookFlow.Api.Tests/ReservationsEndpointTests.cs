@@ -32,5 +32,7 @@ public class ReservationsEndpointTests
         Assert.Equal(1, reservation.Id);
         Assert.Equal("Kim", reservation.CustomerName);
         Assert.Equal("Confirmed", reservation.Status);
+        Assert.Equal(new DateTime(2026, 9, 1, 10, 0, 0), reservation.StartTime);
+        Assert.Equal(new DateTime(2026, 9, 1, 10, 30, 0), reservation.EndTime);
     }
 }

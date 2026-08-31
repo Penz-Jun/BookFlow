@@ -16,7 +16,8 @@ public class ReservationsController : ControllerBase
             {
                 Id = 1,
                 CustomerName = "Kim",
-                ReservationTime = new DateTime(2026, 9, 1, 10, 0, 0),
+                StartTime = new DateTime(2026, 9, 1, 10, 0, 0),
+                EndTime = new DateTime(2026, 9, 1, 10, 30, 0),
                 Status = "Confirmed"
             }
         };

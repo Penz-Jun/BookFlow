@@ -1,7 +1,3 @@
 @BookFlow.Api_HostAddress = http://localhost:5257
-
-GET {{BookFlow.Api_HostAddress}}/weatherforecast/
-ccept: application/json
-###
 GET {{BookFlow.Api_HostAddress}}/api/reservations
 Accept: application/json

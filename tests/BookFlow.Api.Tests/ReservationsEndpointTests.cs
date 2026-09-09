@@ -12,7 +12,7 @@ public class ReservationsEndpointTests
 
     public ReservationsEndpointTests(WebApplicationFactory<Program> factory)
     {
-        _client= factory.CreateClient();
+        _client = factory.CreateClient();
     }
 
     [Fact]
@@ -34,5 +34,37 @@ public class ReservationsEndpointTests
         Assert.Equal("Confirmed", reservation.Status);
         Assert.Equal(new DateTime(2026, 9, 1, 10, 0, 0), reservation.StartTime);
         Assert.Equal(new DateTime(2026, 9, 1, 10, 30, 0), reservation.EndTime);
+    }
+    [Fact]
+    public async Task GetReservationById_WhenRservationExists_ReturnsOkAndReservation()
+    {
+        // Act
+        var response = await _client.GetAsync("/api/reservations/1");
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var reservation =
+            await response.Content.ReadFromJsonAsync<Reservation>();
+
+        Assert.NotNull(reservation);
+        Assert.Equal(1, reservation.Id);
+        Assert.Equal("Kim", reservation.CustomerName);
+        Assert.Equal(
+            new DateTime(2026, 9, 1, 10, 0, 0),
+            reservation.StartTime);
+        Assert.Equal(
+            new DateTime(2026, 9, 1, 10, 30, 0),
+            reservation.EndTime);
+        Assert.Equal("Confirmed", reservation.Status);
+    }
+    [Fact]
+    public async Task GetReservationById_WhenReservationDoesNotExist_ReturnsNotFound()
+    {
+        // Act
+        var response = await _client.GetAsync("/api/reservations/999");
+
+        // Assert
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 }

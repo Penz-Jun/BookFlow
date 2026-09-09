@@ -7,11 +7,8 @@ namespace BookFlow.Api.Controllers;
 [Route("api/[controller]")]
 public class ReservationsController : ControllerBase
 {
-    [HttpGet]
-    public IEnumerable<Reservation> GetReservations()
-    {
-        return new[]
-        {
+    private static readonly List<Reservation> Reservations =
+        [
             new Reservation
             {
                 Id = 1,
@@ -20,6 +17,22 @@ public class ReservationsController : ControllerBase
                 EndTime = new DateTime(2026, 9, 1, 10, 30, 0),
                 Status = "Confirmed"
             }
-        };
+        ];
+
+    [HttpGet]
+    public IEnumerable<Reservation> GetReservations() { return Reservations; }
+    [HttpGet("{id:int}")]
+    public ActionResult<Reservation> GetReservationById(int id)
+    {
+        var reservation = Reservations.FirstOrDefault(
+            reservation => reservation.Id == id);
+
+        if (reservation is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(reservation);
     }
+
 }

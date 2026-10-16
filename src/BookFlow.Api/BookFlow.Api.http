@@ -8,5 +8,39 @@ Accept: application/json
 
 ###
 
+GET {{BookFlow.Api_HostAddress}}/api/reservations/2
+Accept: application/json
+
+###
+
 GET {{BookFlow.Api_HostAddress}}/api/reservations/999
 Accept: application/json
+
+###
+POST {{BookFlow.Api_HostAddress}}/api/reservations
+Content-Type: application/json
+
+{
+  "customerName": "Lee",
+  "startTime": "2026-10-20T10:00:00",
+  "endTime": "2026-10-20T10:30:00"
+}
+
+###
+POST {{BookFlow.Api_HostAddress}}/api/reservations
+Content-Type: application/json
+
+{
+  "customerName": "   ",
+  "startTime": "2026-10-20T10:00:00",
+  "endTime": "2026-10-20T10:30:00"
+}
+###
+POST {{BookFlow.Api_HostAddress}}/api/reservations
+Content-Type: application/json
+
+{
+  "customerName": "LEE",
+  "startTime": "2026-10-20T10:30:00",
+  "endTime": "2026-10-20T10:00:00"
+}
